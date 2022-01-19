@@ -1,13 +1,88 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --bgColor: rgb(250, 250, 250);
+  --fontColor: rgb(62, 61, 73);
+  --todoBgColor: white;
+  --bgImage: url("./assets/images/bg-desktop-light.jpg");
+  --circleColor: rgb(224, 222, 231);
+  --inputField: rgb(73, 72, 80);
+  --inputFieldPlaceholder: rgb(176, 175, 183);
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.dark-theme {
+  --bgColor: rgb(24, 24, 36);
+  --fontColor: rgb(138, 140, 163);
+  --todoBgColor: rgb(37, 39, 60);
+  --bgImage: url("./assets/images/bg-desktop-dark.jpg");
+  --circleColor: rgb(64, 65, 80);
+  --inputField: rgb(175, 177, 200);
+  --inputFieldPlaceholder: rgb(112, 113, 133);
+}
+.light-theme {
+  --bgColor: #fff;
+  --fontColor: rgb(62, 61, 73);
+  --todoBgColor: white;
+  --bgImage: url("./assets/images/bg-desktop-light.jpg");
+  --circleColor: rgb(224, 222, 231);
+  --inputField: rgb(73, 72, 80);
+  --inputFieldPlaceholder: rgb(176, 175, 183);
+}
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  color: var(--clr-font);
+  line-height: 1.5;
+  font-size: 0.875rem;
+  background-color: var(--bgColor);
+  transition: all 0.3s linear;
+  background-image: var(--bgImage);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  font-family: "Spartan", sans-serif;
+}
+button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.container {
+  width: 540px;
+  margin: 65px auto 0 auto;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+}
+h1 {
+  font-size: 38px;
+  letter-spacing: 15px;
+  color: #fff;
+}
+.empty-todo-list {
+  text-align: center;
+  color: var(--inputField);
+}
+@media (max-width: 767px) {
+  :root {
+    --bgImage: url("./assets/images/bg-mobile-light.jpg");
+  }
+  .dark-theme {
+    --bgImage: url("./assets/images/bg-mobile-dark.jpg");
+  }
+  .light-theme {
+    --bgImage: url("./assets/images/bg-mobile-light.jpg");
+  }
+  .body {
+    background-size: contain;
+  }
+  .container {
+    width: 90%;
+    margin: 65px auto 0 auto;
+  }
+  h1 {
+    font-size: 26px;
+  }
 }
