@@ -108,6 +108,9 @@ single-todo
   text-align: center;
   margin-top: 50px;
 }
+.display-none {
+  display: none;
+}
 /*****************
 responsive for mob
 *****************/

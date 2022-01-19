@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Todo } from "../models/models";
 import SingleTodo from "./SingleTodo";
 import "./TodoList.css";
@@ -8,8 +8,7 @@ import { Droppable } from "react-beautiful-dnd";
 interface props {
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  data: Todo[];
-  setData: React.Dispatch<React.SetStateAction<Todo[]>>;
+
   filter: string;
   setFilter: (e: string) => void;
   filterData: (e: string) => void;
@@ -18,15 +17,14 @@ interface props {
 const TodoList: React.FC<props> = ({
   todos,
   setTodos,
-  data,
-  setData,
+
   filter,
   setFilter,
   filterData,
 }) => {
   let itemsLeftLenght: number = 0;
   {
-    data?.map((item) => {
+    todos?.map((item) => {
       if (!item.isDone) {
         itemsLeftLenght += 1;
       }
@@ -34,8 +32,7 @@ const TodoList: React.FC<props> = ({
   }
 
   const clearCompleted = () => {
-    setTodos(data.filter((todo) => !todo.isDone));
-    setData(data.filter((todo) => !todo.isDone));
+    setTodos(todos.filter((todo) => !todo.isDone));
     if (filter === "Completed") setFilter("All");
   };
 
@@ -56,8 +53,6 @@ const TodoList: React.FC<props> = ({
                   todo={todo}
                   key={todo.id}
                   setTodos={setTodos}
-                  data={data}
-                  setData={setData}
                   filter={filter}
                 />
               ))}

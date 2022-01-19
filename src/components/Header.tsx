@@ -4,12 +4,11 @@ import sun from "../assets/images/icon-sun.svg";
 import { Todo } from "../models/models";
 
 interface props {
-  setTodos: React.Dispatch<React.SetStateAction<Todo[] | any>>;
-  data: Todo[];
-  setData: React.Dispatch<React.SetStateAction<Todo[] | any>>;
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  todos: Todo[];
 }
 
-const Header: React.FC<props> = ({ setTodos, data, setData }) => {
+const Header: React.FC<props> = ({ setTodos, todos }) => {
   const [theme, setTheme] = useState<string>("light-theme");
 
   const toggleTheme = () => {
@@ -25,9 +24,8 @@ const Header: React.FC<props> = ({ setTodos, data, setData }) => {
       const useLocalStorageTheme = localStorage.getItem("theme") || "";
       setTheme(useLocalStorageTheme);
     }
-    if (localStorage.getItem("data")) {
-      const useLocalStorageData = JSON.parse(localStorage.data);
-      setData(useLocalStorageData);
+    if (localStorage.getItem("todos")) {
+      const useLocalStorageData = JSON.parse(localStorage.todos);
       setTodos(useLocalStorageData);
     }
   }, []);
@@ -36,9 +34,11 @@ const Header: React.FC<props> = ({ setTodos, data, setData }) => {
     document.documentElement.className = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
+
   useEffect(() => {
-    localStorage.setItem("data", JSON.stringify(data));
-  }, [data]);
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
   return (
     <header>
       <h1>TODO</h1>

@@ -9,36 +9,29 @@ const SingleTodo: React.FC<{
   todo: Todo;
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  data: Todo[];
-  setData: React.Dispatch<React.SetStateAction<Todo[]>>;
   filter: string;
-}> = ({ todo, todos, setTodos, data, setData, filter, index }) => {
+}> = ({ todo, todos, setTodos, filter, index }) => {
   const handleDone = (id: number) => {
-    setData(
-      data.map((todo) =>
+    setTodos(
+      todos.map((todo) =>
         todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
       )
     );
-    if (filter === "All") {
-      setTodos(
-        todos.map((todo) =>
-          todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
-        )
-      );
-    } else {
-      setTodos(todos.filter((todo) => todo.id !== id));
-    }
   };
   const handleDelete = (id: number) => {
     setTodos(todos.filter((todo) => todo.id !== id));
-    setData(data.filter((todo) => todo.id !== id));
   };
 
   return (
     <Draggable draggableId={todo.id.toString()} index={index}>
       {(provided) => (
         <div
-          className="single-todo"
+          className={
+            (filter === "Completed" && !todo.isDone) ||
+            (filter === "Active" && todo.isDone)
+              ? "display-none"
+              : "single-todo"
+          }
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}

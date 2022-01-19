@@ -8,38 +8,25 @@ import { DragDropContext, DropResult } from "react-beautiful-dnd";
 
 const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("");
-  const [data, setData] = useState<Todo[]>([]);
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filter, setFilter] = useState<string>("All");
-
+  console.log(todos);
   const filterData = (value: string) => {
     setFilter(value);
-    if (value === "All") {
-      setTodos(data);
-    } else if (value === "Active") {
-      setTodos(data.filter((todo) => !todo.isDone));
-    } else if (value === "Completed") {
-      setTodos(data.filter((todo) => todo.isDone));
-    }
   };
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (todo) {
-      setData([...data, { id: Date.now(), todo, isDone: false }]);
+      setTodos([...todos, { id: Date.now(), todo, isDone: false }]);
       setTodo("");
-      if (filter === "Completed") {
-        return;
-      } else {
-        setTodos([...todos, { id: Date.now(), todo, isDone: false }]);
-      }
     }
   };
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result;
-
+    console.log(source, destination);
     if (!destination) return;
     if (
       destination.droppableId === source.droppableId &&
@@ -55,14 +42,12 @@ const App: React.FC = () => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="container">
-        <Header setTodos={setTodos} data={data} setData={setData} />
+        <Header setTodos={setTodos} todos={todos} />
         <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
-        {data.length > 0 ? (
+        {todos.length > 0 ? (
           <TodoList
             todos={todos}
             setTodos={setTodos}
-            data={data}
-            setData={setData}
             filter={filter}
             setFilter={setFilter}
             filterData={filterData}
