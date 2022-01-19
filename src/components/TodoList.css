@@ -21,14 +21,14 @@
   justify-content: center;
   height: 65px;
 }
+.filter-btn.active {
+  color: rgb(61, 117, 223) !important;
+  font-weight: 700;
+}
 .filter-btn {
   cursor: pointer;
   color: var(--inputFieldPlaceholder) !important;
   width: 70px;
-}
-.filter-btn.active {
-  color: rgb(61, 117, 223) !important;
-  font-weight: 700;
 }
 .filter-btn:hover,
 .clear-btn:hover {
