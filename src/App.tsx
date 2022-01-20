@@ -10,7 +10,7 @@ const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filter, setFilter] = useState<string>("All");
-  console.log(todos);
+
   const filterData = (value: string) => {
     setFilter(value);
   };
@@ -38,6 +38,8 @@ const App: React.FC = () => {
     const [reorderedItem] = active.splice(result.source.index, 1);
     active.splice(destination.index, 0, reorderedItem);
     setTodos(active);
+
+    localStorage.setItem("todos", JSON.stringify(active));
   };
   return (
     <DragDropContext onDragEnd={onDragEnd}>
